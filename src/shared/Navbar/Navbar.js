@@ -137,8 +137,8 @@ const Navbar = () => {
       {/* ......................
       ......................... */}
       {user && (
-        <UserNavContainer>
-          <div className="grid z-10 flex-grow  bg-slate-200  place-items-center p-1">
+        <UserNavContainer className='mt-10'>
+          <div className="grid z-10 flex-grow  bg-slate-200  place-items-center p-1 ">
             <UserProfile>
               <ProfileImage>
                 <img
