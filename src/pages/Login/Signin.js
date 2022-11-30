@@ -54,13 +54,13 @@ const Signin = () => {
     const location = useLocation();
     let from = location.state?.from?.pathname || "/";
 
-    // useEffect(() => {
-    //     if (guser || user) {
-    //         console.log(guser || user);
-    //         navigate(from, { replace: true });
-    //         navigate('/home')
-    //     }
-    // }, [guser, user, from, navigate]);
+    useEffect(() => {
+        if (guser || user) {
+            console.log(guser || user);
+            navigate(from, { replace: true });
+            // navigate('/home')
+        }
+    }, [guser, user, from, navigate]);
 
     if(user || guser){
         console.log(user,guser)

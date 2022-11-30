@@ -12,6 +12,7 @@ import { HouseChimneyUser } from 'styled-icons/fa-solid';
 import { UserGroup } from 'styled-icons/heroicons-outline';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import VendorLinks from './VendorLinks';
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
@@ -22,6 +23,7 @@ const Dashboard = () => {
                 <div className="drawer-content p-1 md:p-4 z-20">
                     {/* <!-- Page content here --> */}
                     <nav
+                        
                         aria-label="menu nav"
                         className="border-2 border-softOrange mb-6 pt-2 md:pt-1 pb-1 px-1 rounded mt-0 w-full h-auto "
                     >
@@ -245,8 +247,8 @@ const Dashboard = () => {
                                 </li>
                         
 
-
                             {/* {vendorAdmin && <VendorLinks />} */}
+                            {<VendorLinks />}
                         </div>
                     </DashboarLinks>
                 </div>

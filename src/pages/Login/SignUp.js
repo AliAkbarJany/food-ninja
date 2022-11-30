@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../../shared/Loading/Loading';
 import { Logo, NavLogo } from '../../shared/Navbar/Navbar.elements';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
 
@@ -19,12 +20,12 @@ const SignUp = () => {
 
     // Custom Hook (useToken)....
 
-    // const [token] = useToken(guser || user);
+    const [token] = useToken(guser || user);
 
     const navigate = useNavigate();
 
     const location = useLocation();
-    // let from = location.state?.from?.pathname || "/";
+    let from = location.state?.from?.pathname || "/";
 
     const {
         register,
@@ -51,6 +52,7 @@ const SignUp = () => {
 
     if (guser || user) {
         console.log(guser || user)
+        // navigate(from, { replace: true });
         navigate('/')
     }
 
