@@ -181,7 +181,7 @@ const Merchant = () => {
                                         // required
                                         {...register("banner", {})}
                                         type="url"
-                                        placeholder="Company Banner"
+                                        placeholder="Restaurant Banner"
                                         className="input input-bordered w-full max-w-xs"
                                     />
                                 </div>
@@ -190,7 +190,7 @@ const Merchant = () => {
                                         // required
                                         {...register("logo", {})}
                                         type="url"
-                                        placeholder="Company Logo"
+                                        placeholder="Restaurant Logo"
                                         className="input input-bordered w-full max-w-xs"
                                     />
                                 </div>

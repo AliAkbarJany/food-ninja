@@ -5,7 +5,8 @@ import DefaultPic from '../../assets/Login/default_pic.jpg'
 import styled, { keyframes } from 'styled-components';
 // import { AdminPanelSettings } from 'styled-icons/material';
 import { AdminPanelSettings } from "@styled-icons/material/AdminPanelSettings";
-import { NavLogo, ProfileImage } from '../../shared/Navbar/Navbar.elements';
+import { Logo, NavLogo, ProfileImage } from '../../shared/Navbar/Navbar.elements';
+import headerLogo from "../../assets/Header/Logo1.png";
 import { DashboardCustomize, Restaurant } from 'styled-icons/material';
 import { ClipboardCheck } from 'styled-icons/heroicons-solid';
 import { HouseChimneyUser } from 'styled-icons/fa-solid';
@@ -130,9 +131,10 @@ const Dashboard = () => {
                     <DashboarLinks className="menu p-3 overflow-y-auto w-40 content-center text-center bg-base-100 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <div className="text-sm text-center">
-                            {/* <NavLogo to="/" className="pb-5">
-                                <LogoImage src={headerLogo} alt="Company Logo" />
-                            </NavLogo> */}
+                            <NavLogo to="/" className="pb-5">
+                                {/* <LogoImage src={headerLogo} alt="Company Logo" /> */}
+                                <Logo src={headerLogo} alt="Company Logo" />
+                            </NavLogo>
                             <li>
                                 <NavLink
                                     end
