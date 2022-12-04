@@ -14,9 +14,14 @@ import { UserGroup } from 'styled-icons/heroicons-outline';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import VendorLinks from './VendorLinks';
+import useAdmin from '../../hooks/useAdmin';
+import useVendorAccess from '../../hooks/useVendor';
 
 const Dashboard = () => {
     const [user] = useAuthState(auth);
+
+    const [admin] = useAdmin(user);
+    const [vendorAdmin] = useVendorAccess(user);
     return (
         <>
             <div className="drawer drawer-mobile  bg-lightOrange pt-2 md:pt-1 pb-1 px-1 mt-0 font-uber">
@@ -24,7 +29,7 @@ const Dashboard = () => {
                 <div className="drawer-content p-1 md:p-4 z-20">
                     {/* <!-- Page content here --> */}
                     <nav
-                        
+
                         aria-label="menu nav"
                         className="border-2 border-softOrange mb-6 pt-2 md:pt-1 pb-1 px-1 rounded mt-0 w-full h-auto "
                     >
@@ -84,7 +89,7 @@ const Dashboard = () => {
                                                 </Emoji>
                                             </button>
                                         </div>
-                                        {/* {admin && (
+                                        {admin && (
                                             <div className="flex items-center justify-end pt-1 font-bold">
                                                 <AdminPanelSettings color="#473125" width={24} />
                                                 <p className="text-right text-xs">Admin</p>
@@ -96,18 +101,18 @@ const Dashboard = () => {
                                                 <AdminPanelSettings color="#473125" width={24} />
                                                 <p className="text-right text-xs">Vendor Admin</p>
                                             </div>
-                                        )} */}
-                                      
-                                            <div className="flex items-center justify-end pt-1 font-bold">
-                                                <AdminPanelSettings color="#473125" width={24} />
-                                                <p className="text-right text-xs">Admin</p>
-                                            </div>
-                                       
-                                            <div className="flex items-center justify-end pt-1 font-bold">
-                                                <AdminPanelSettings color="#473125" width={24} />
-                                                <p className="text-right text-xs">Vendor Admin</p>
-                                            </div>
-                                        
+                                        )}
+
+                                        {/* <div className="flex items-center justify-end pt-1 font-bold">
+                                            <AdminPanelSettings color="#473125" width={24} />
+                                            <p className="text-right text-xs">Admin</p>
+                                        </div>
+
+                                        <div className="flex items-center justify-end pt-1 font-bold">
+                                            <AdminPanelSettings color="#473125" width={24} />
+                                            <p className="text-right text-xs">Vendor Admin</p>
+                                        </div> */}
+
                                     </li>
                                     <li className="flex-1 md:flex-none hidden md:block md:mr-3">
                                         <ProfileImage>
@@ -148,7 +153,7 @@ const Dashboard = () => {
                                 </NavLink>
                             </li>
 
-                            {/* {admin && (
+                            {admin && (
                                 <li>
                                     <NavLink
                                         className={(navData) =>
@@ -160,20 +165,20 @@ const Dashboard = () => {
                                         <span>Make Vendor</span>
                                     </NavLink>
                                 </li>
-                            )} */}
-                            
-                                <li>
-                                    <NavLink
-                                        className={(navData) =>
-                                            navData.isActive ? "active" : "linkstyle"
-                                        }
-                                        to="/dashboard/make_vendor"
-                                    >
-                                        <Restaurant width={26} />
-                                        <span>Make Vendor</span>
-                                    </NavLink>
-                                </li>
-                            
+                            )}
+
+                            {/* <li>
+                                <NavLink
+                                    className={(navData) =>
+                                        navData.isActive ? "active" : "linkstyle"
+                                    }
+                                    to="/dashboard/make_vendor"
+                                >
+                                    <Restaurant width={26} />
+                                    <span>Make Vendor</span>
+                                </NavLink>
+                            </li> */}
+
 
                             {/* {admin && (
                                 <li>
@@ -184,16 +189,16 @@ const Dashboard = () => {
                                 </li>
                             )} */}
 
-                            
-                                <li>
-                                    <NavLink to="/merchants">
-                                        <ClipboardCheck width={26} />
-                                        <span>Vendor Status</span>
-                                    </NavLink>
-                                </li>
-                            
 
-                            {/* {admin && (
+                            <li>
+                                <NavLink to="/merchants">
+                                    <ClipboardCheck width={26} />
+                                    <span>Vendor Status</span>
+                                </NavLink>
+                            </li>
+
+
+                            {admin && (
                                 <li>
                                     <NavLink
                                         className={(navData) =>
@@ -205,23 +210,10 @@ const Dashboard = () => {
                                         <span> All Vendors</span>
                                     </NavLink>
                                 </li>
-                            )} */}
+                            )}
 
-                         
-                                <li>
-                                    <NavLink
-                                        className={(navData) =>
-                                            navData.isActive ? "active" : "linkstyle"
-                                        }
-                                        to="/dashboard/all_vendor"
-                                    >
-                                        <HouseChimneyUser width={26} />
-                                        <span> All Vendors</span>
-                                    </NavLink>
-                                </li>
-                        
 
-                            {/* {admin && (
+                            {admin && (
                                 <li>
                                     <NavLink
                                         className={(navData) =>
@@ -233,24 +225,11 @@ const Dashboard = () => {
                                         <span>All Users</span>
                                     </NavLink>
                                 </li>
-                            )} */}
+                            )}
 
-                            
-                                <li>
-                                    <NavLink
-                                        className={(navData) =>
-                                            navData.isActive ? "active" : "linkstyle"
-                                        }
-                                        to="/dashboard/all_user"
-                                    >
-                                        <UserGroup width={26} />
-                                        <span>All Users</span>
-                                    </NavLink>
-                                </li>
-                        
 
-                            {/* {vendorAdmin && <VendorLinks />} */}
-                            {<VendorLinks />}
+                            {vendorAdmin && <VendorLinks />}
+                            {/* {<VendorLinks />} */}
                         </div>
                     </DashboarLinks>
                 </div>

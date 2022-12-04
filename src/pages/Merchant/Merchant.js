@@ -9,17 +9,18 @@ import auth from '../../firebase.init';
 import { Logo, NavLogo } from '../../shared/Navbar/Navbar.elements';
 import MerchantStatus from './MerchantStatus';
 import headerLogo from "../../assets/Header/Logo2.png";
+import { useQuery } from 'react-query';
 
 const Merchant = () => {
     const [user] = useAuthState(auth);
 
-  const [date, setDate] = useState("");
+    const [date, setDate] = useState("");
 
-  useEffect(() => {
-    const myDate = new Date();
-    const formattedDate = format(myDate, "PP");
-    setDate(formattedDate);
-  }, []);
+    useEffect(() => {
+        const myDate = new Date();
+        const formattedDate = format(myDate, "PP");
+        setDate(formattedDate);
+    }, []);
     // (REact-Hook-Form)......handle error
     const {
         register,
@@ -28,44 +29,54 @@ const Merchant = () => {
         reset,
     } = useForm();
 
+    const {
+        data: restaurantInfo,
+        isLoading,
+        refetch,
+    } = useQuery(["Restaurant", user.email], () =>
+        fetch(`http://localhost:5000/restaurant?restaurantId=${user.email}`).then(
+            (res) => res.json()
+        )
+    );
+
     const onSubmit = (data) => {
         const restaurantData = {
-          ownerName: data.fName + " " + data.lName,
-          contact: data.mobile,
-          email: user?.email,
-          restaurantName: data.restaurant,
-          restaurantType: data.type,
-          restaurantBanner: data.banner,
-          restaurantLogo: data.logo,
-          restaurantAddress: data.address,
-          applicationStatus: "pending",
-          apply_date: date,
-        //   restaurant_id: restaurantInfo?.restaurant_id || "",
+            ownerName: data.fName + " " + data.lName,
+            contact: data.mobile,
+            email: user?.email,
+            restaurantName: data.restaurant,
+            restaurantType: data.type,
+            restaurantBanner: data.banner,
+            restaurantLogo: data.logo,
+            restaurantAddress: data.address,
+            applicationStatus: "pending",
+            apply_date: date,
+              restaurant_id: restaurantInfo?.restaurant_id || "",
         };
         // console.log(restaurantInfo);
         fetch(`http://localhost:5000/restaurant/${user.email}`, {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(restaurantData),
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(restaurantData),
         })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            // if (data.success) {
-            //   setApplication(data.restaurant);
-            //   refetch();
-            //   navigate("/merchants");
-            // }
-          })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                // if (data.success) {
+                //   setApplication(data.restaurant);
+                //   refetch();
+                //   navigate("/merchants");
+                // }
+            })
         //   .catch((error) => {
         //     console.log(error);
         //   });
-    
+
         reset();
-      };
-    
+    };
+
     return (
         <MerchantSecion>
             <CorporateApplyContainer>
@@ -90,11 +101,11 @@ const Merchant = () => {
                             />
                         </>
                     ) : ( */}
-                        <CorporateContentForm>
-                            <CorporateForm onSubmit={handleSubmit(onSubmit)}>
-                                <h4>Your Details</h4>
-                                <div className="pb-5">
-                                    {/* {restaurantInfo?.restaurant_id && (
+                    <CorporateContentForm>
+                        <CorporateForm onSubmit={handleSubmit(onSubmit)}>
+                            <h4>Your Details</h4>
+                            <div className="pb-5">
+                                {/* {restaurantInfo?.restaurant_id && (
                                         <div className="form-control w-full max-w-xs">
                                             <label className="label">
                                                 <span className="label-text">Restaurant ID</span>
@@ -108,116 +119,116 @@ const Merchant = () => {
                                             />
                                         </div>
                                     )} */}
-                                    <div className="form-control w-full max-w-xs">
-                                        <label className="label">
-                                            <span className="label-text">Email</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            {...register("email", {})}
-                                            value={user?.email}
-                                            placeholder="You can't touch this"
-                                            className="input input-bordered w-full max-w-xs"
-                                            disabled
-                                        />
-                                    </div>
-                                    <div className="form-control w-full max-w-xs pt-5">
-                                        <input
-                                            required
-                                            {...register("fName", {})}
-                                            type="text"
-                                            placeholder="First Name"
-                                            className="input input-bordered w-full max-w-xs"
-                                        />
-                                    </div>
-                                    <div className="form-control w-full max-w-xs pt-5">
-                                        <input
-                                            required
-                                            {...register("lName", {})}
-                                            type="text"
-                                            placeholder="Last Name"
-                                            className="input input-bordered w-full max-w-xs"
-                                        />
-                                    </div>
-                                    <div className="form-control w-full max-w-xs pt-5">
-                                        <label className="input-group">
-                                            <span className="text-accent ">
-                                                <img width={22} src={BD} alt="" className="mr-1" />
-                                                +880
-                                            </span>
-                                            <input
-                                                required
-                                                {...register("mobile", { valueAsNumber: true })}
-                                                type="number"
-                                                className="input input-bordered w-full max-w-xs"
-                                            />
-                                        </label>
-                                    </div>
+                                <div className="form-control w-full max-w-xs">
+                                    <label className="label">
+                                        <span className="label-text">Email</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        {...register("email", {})}
+                                        value={user?.email}
+                                        placeholder="You can't touch this"
+                                        className="input input-bordered w-full max-w-xs"
+                                        disabled
+                                    />
                                 </div>
-                                <h4>Company Details</h4>
                                 <div className="form-control w-full max-w-xs pt-5">
                                     <input
                                         required
-                                        {...register("restaurant", {})}
+                                        {...register("fName", {})}
                                         type="text"
-                                        placeholder="Restaurant Name"
-                                        className="input input-bordered w-full max-w-xs"
-                                    />
-                                </div>
-                                <div className="form-control w-full max-w-xs pt-5">
-                                    <label className="input-group">
-                                        <span>Type</span>
-                                        <input
-                                            required
-                                            {...register("type", {})}
-                                            type="text"
-                                            placeholder="eg. Convenience, Snacks"
-                                            className="input input-bordered w-full max-w-xs"
-                                        />
-                                    </label>
-                                </div>
-                                <div className="form-control w-full max-w-xs pt-5">
-                                    <input
-                                        // required
-                                        {...register("banner", {})}
-                                        type="url"
-                                        placeholder="Restaurant Banner"
+                                        placeholder="First Name"
                                         className="input input-bordered w-full max-w-xs"
                                     />
                                 </div>
                                 <div className="form-control w-full max-w-xs pt-5">
                                     <input
-                                        // required
-                                        {...register("logo", {})}
-                                        type="url"
-                                        placeholder="Restaurant Logo"
+                                        required
+                                        {...register("lName", {})}
+                                        type="text"
+                                        placeholder="Last Name"
                                         className="input input-bordered w-full max-w-xs"
                                     />
                                 </div>
                                 <div className="form-control w-full max-w-xs pt-5">
                                     <label className="input-group">
-                                        <span>
-                                            <Location width={24} />
+                                        <span className="text-accent ">
+                                            <img width={22} src={BD} alt="" className="mr-1" />
+                                            +880
                                         </span>
                                         <input
-                                            // required
-                                            {...register("address", {})}
-                                            type="text"
-                                            placeholder="Address"
+                                            required
+                                            {...register("mobile", { valueAsNumber: true })}
+                                            type="number"
                                             className="input input-bordered w-full max-w-xs"
                                         />
                                     </label>
                                 </div>
-                                <div className="form-control w-full max-w-xs pt-5">
-                                    <button
-                                        type="submit"
-                                        className="btn btn-block w-full max-w-xs"
-                                    >
-                                        Apply
-                                    </button>
-                                </div>
-                            </CorporateForm>
-                        </CorporateContentForm>
+                            </div>
+                            <h4>Company Details</h4>
+                            <div className="form-control w-full max-w-xs pt-5">
+                                <input
+                                    required
+                                    {...register("restaurant", {})}
+                                    type="text"
+                                    placeholder="Restaurant Name"
+                                    className="input input-bordered w-full max-w-xs"
+                                />
+                            </div>
+                            <div className="form-control w-full max-w-xs pt-5">
+                                <label className="input-group">
+                                    <span>Type</span>
+                                    <input
+                                        required
+                                        {...register("type", {})}
+                                        type="text"
+                                        placeholder="eg. Convenience, Snacks"
+                                        className="input input-bordered w-full max-w-xs"
+                                    />
+                                </label>
+                            </div>
+                            <div className="form-control w-full max-w-xs pt-5">
+                                <input
+                                    // required
+                                    {...register("banner", {})}
+                                    type="url"
+                                    placeholder="Restaurant Banner"
+                                    className="input input-bordered w-full max-w-xs"
+                                />
+                            </div>
+                            <div className="form-control w-full max-w-xs pt-5">
+                                <input
+                                    // required
+                                    {...register("logo", {})}
+                                    type="url"
+                                    placeholder="Restaurant Logo"
+                                    className="input input-bordered w-full max-w-xs"
+                                />
+                            </div>
+                            <div className="form-control w-full max-w-xs pt-5">
+                                <label className="input-group">
+                                    <span>
+                                        <Location width={24} />
+                                    </span>
+                                    <input
+                                        // required
+                                        {...register("address", {})}
+                                        type="text"
+                                        placeholder="Address"
+                                        className="input input-bordered w-full max-w-xs"
+                                    />
+                                </label>
+                            </div>
+                            <div className="form-control w-full max-w-xs pt-5">
+                                <button
+                                    type="submit"
+                                    className="btn btn-block w-full max-w-xs"
+                                >
+                                    Apply
+                                </button>
+                            </div>
+                        </CorporateForm>
+                    </CorporateContentForm>
                     {/* )} */}
                 </CorporateContents>
             </CorporateApplyContainer>
