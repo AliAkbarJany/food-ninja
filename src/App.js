@@ -18,6 +18,9 @@ import MakeVendor from './pages/Dashboard/MakeVendor/MakeVendor';
 import Merchant from './pages/Merchant/Merchant';
 import MyProfile from './pages/Dashboard/MyProfile';
 import RequireAuth from './pages/Login/RequireAuth';
+import ManageItems from './pages/Dashboard/ManageItems/ManageItems';
+import RequireVendor from './pages/Login/RequireVendor'
+import AddMenu from './pages/Dashboard/AddMenu/AddMenu';
 
 function App() {
   return (
@@ -46,6 +49,42 @@ function App() {
           <Route path='all_user' element={<AllUsers></AllUsers>}></Route>
           <Route path='all_vendor' element={<AllVendors></AllVendors>}></Route>
           <Route path='make_vendor' element={<MakeVendor></MakeVendor>}></Route>
+
+          {/* <Route
+            path="menu_list"
+            element={
+              <RequireVendor>
+                <MenuList></MenuList>
+              </RequireVendor>
+            }
+          ></Route> */}
+
+          <Route
+            path="add_menu"
+            element={
+              <RequireVendor>
+                <AddMenu></AddMenu>
+              </RequireVendor>
+            }
+          ></Route>
+
+          {/* <Route
+            path="all_order"
+            element={
+              <RequireVendor>
+                <AllOrders></AllOrders>
+              </RequireVendor>
+            }
+          ></Route> */}
+
+          <Route
+            path="manage_items"
+            element={
+              <RequireVendor>
+                <ManageItems></ManageItems>
+              </RequireVendor>
+            }
+          ></Route>
 
         </Route>
       </Routes>

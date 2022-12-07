@@ -29,6 +29,8 @@ const Merchant = () => {
         reset,
     } = useForm();
 
+    // ai khane (useQuery).. pore kora hoise.
+    // (useQuery) use kora hiose aita check korar jonno j (restaurant_id).. ase kina?
     const {
         data: restaurantInfo,
         isLoading,
@@ -51,7 +53,7 @@ const Merchant = () => {
             restaurantAddress: data.address,
             applicationStatus: "pending",
             apply_date: date,
-              restaurant_id: restaurantInfo?.restaurant_id || "",
+            restaurant_id: restaurantInfo?.restaurant_id || "",
         };
         // console.log(restaurantInfo);
         fetch(`http://localhost:5000/restaurant/${user.email}`, {
