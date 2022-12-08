@@ -21,6 +21,7 @@ import RequireAuth from './pages/Login/RequireAuth';
 import ManageItems from './pages/Dashboard/ManageItems/ManageItems';
 import RequireVendor from './pages/Login/RequireVendor'
 import AddMenu from './pages/Dashboard/AddMenu/AddMenu';
+import Restaurant from './pages/Restaurant/Restaurant';
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
         <Route path='/contact' element={<Contact></Contact>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='/signin' element={<Signin></Signin>}></Route>
+
+        <Route
+          path="restaurant/:restaurantId"
+          element={<Restaurant></Restaurant>}
+        ></Route>
 
         {/* merchant.... */}
         <Route path='merchants' element={<Merchant></Merchant>} ></Route>
@@ -87,6 +93,8 @@ function App() {
           ></Route>
 
         </Route>
+        {/* .........Dashboard end......... */}
+
       </Routes>
       <ToastContainer />
     </div>
