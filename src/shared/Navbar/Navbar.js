@@ -9,6 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { signOut } from 'firebase/auth';
 import { ShoppingCartOutline } from 'styled-icons/evaicons-outline';
+import { useShoppingCart } from 'use-shopping-cart';
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
@@ -21,8 +22,10 @@ const Navbar = () => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
-// .........................................
-// /..................................
+  const { cartCount, cartDetails } = useShoppingCart();
+  const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
+  // .........................................
+  // /..................................
   const [button, setButton] = useState(true);
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -85,7 +88,22 @@ const Navbar = () => {
                     Signin
                   </NavLink>
               }
-              
+
+            </ListItem>
+            <ListItem>
+              <CartBtn>
+                <div className="indicator">
+                  <span className="indicator-bottom indicator-start indicator-item badge badge-error">
+                    {cartCount}
+                  </span>
+
+                  <ShoppingCartOutline
+                    className="grid bg-base-300 place-items-center"
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              </CartBtn>
             </ListItem>
             <NavItemBtn>
               {!button && (
@@ -110,6 +128,7 @@ const Navbar = () => {
               )}
             </NavItemBtn>
           </NavMenu>
+
         </LeftNav>
 
         <RightNav>
@@ -187,13 +206,47 @@ const Navbar = () => {
                   </li>
                 </ul>
               </div>
+
             </UserProfile>
           </div>
           <div className="divider divider-horizontal p-0 m-0"></div>
           <div className="grid z-10 flex-grow  bg-slate-300  place-items-center">
-            <CartBtn>
-              <ShoppingCartOutline width={32} height={30} />
-            </CartBtn>
+            {cartCount ? (
+              <NavLink
+                to={`/restaurant/${cartItems[0]?.restaurantInfo?.restaurant_id}`}
+                onClick={() => {
+                  window.reload();
+                }}
+              >
+                <CartBtn>
+                  <div className="indicator">
+                    <span className="indicator-bottom indicator-start indicator-item badge badge-error">
+                      {cartCount}
+                    </span>
+
+                    <ShoppingCartOutline
+                      className="grid bg-base-300 place-items-center"
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                </CartBtn>
+              </NavLink>
+            ) : (
+              <CartBtn>
+                <div className="indicator">
+                  <span className="indicator-bottom indicator-start indicator-item badge badge-error">
+                    {cartCount}
+                  </span>
+
+                  <ShoppingCartOutline
+                    className="grid bg-base-300 place-items-center"
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              </CartBtn>
+            )}
           </div>
         </UserNavContainer>
       )}

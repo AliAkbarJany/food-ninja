@@ -18,16 +18,6 @@ export const NavContainer = styled.nav`
   border-color: #7070708a;
   z-index: 2;
 `;
-
-
-
-export const NavLogo = styled(Link)`
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-`;
 export const NavMenu = styled.ul`
   @media screen and (max-width: 960px) {
     display: flex;
@@ -45,6 +35,28 @@ export const NavMenu = styled.ul`
     background: #101522;
   }
 `;
+
+export const UserNavContainer = styled.nav`
+  position: absolute;
+  top: 100px;
+  right: 2px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: gray;
+  padding: 4px;
+  border-radius: 5px;
+`;
+export const NavLogo = styled(Link)`
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const ListItem = styled.li`
   list-style: none;
   display: inline-block;
@@ -59,6 +71,7 @@ export const ListItem = styled.li`
   }
 
   a {
+    cursor: pointer;
     text-decoration: none;
     color: #fff;
     font-size: 18px;
@@ -108,7 +121,7 @@ export const NavOverlay = styled.div`
   background-image: url(${nav_pattern});
   background-repeat: no-repeat;
   opacity: 0.5;
-  transition:  0.3s, border-radius 0.3s, opacity 0.3s;
+  transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
   /* height: 92px; */
   width: 100%;
   height: 35px;
@@ -117,13 +130,15 @@ export const NavOverlay = styled.div`
 export const Logo = styled.img`
   height: 100px;
 `;
-
+export const LogoImage = styled.img`
+  height: 100px;
+`;
 export const LeftNav = styled.div`
   margin-left: 2rem;
 `;
 export const RightNav = styled.div`
   margin-left: auto;
-  @media screen and (max-width: 660px) {
+  @media screen and (max-width: 960px) {
     display: none;
   }
 `;
@@ -158,7 +173,8 @@ export const RegisterBtn = styled.button`
   font-weight: 700;
   text-transform: uppercase;
   color: #ffffff;
-  border: 2px solid #ffffff;
+  border: ${(props) =>
+    props.user ? "2px solid #e7272d" : "2px solid #ffffff"};
   background-color: transparent;
   background-repeat: no-repeat;
   outline: none;
@@ -183,12 +199,14 @@ export const RegisterBtn = styled.button`
   }
 
   &:before {
-    border-top: 2px solid #fff;
+    border-top: ${(props) =>
+      props.user ? "2px solid #e7272d" : "2px solid #ffffff"};
     right: 0;
     top: -4px;
   }
   &:after {
-    border-bottom: 2px solid #fff;
+    border-bottom: ${(props) =>
+      props.user ? "2px solid #e7272d" : "2px solid #ffffff"};
     bottom: -4px;
     left: 0;
   }
@@ -215,33 +233,18 @@ export const MobileIcon = styled.div`
   }
 `;
 
-export const UserNavContainer = styled.nav`
-  position: absolute;
-  top: 100px;
-  right: 2px;
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-  background-color: #e2e8f0;
-  color: gray;
-  padding: 4px;
-  border-radius: 5px;
-`;
-
 export const CartBtn = styled.div`
   cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 700;
-  display: block;
-  min-width: 36px;
+
+  /* min-width: 35px; */
   border-radius: 5px;
-  padding: 0 3px;
-  position: relative;
-  z-index: 2;
-  color: red;
+
+  color: #c21760;
   transition: background-color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
     color 150ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  svg {
+    background-color: #3333;
+  }
 `;
 export const UserProfile = styled.div`
   display: flex;

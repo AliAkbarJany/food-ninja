@@ -1,12 +1,25 @@
 import styled from "styled-components";
-// import { UserNavContainer } from "../../layouts/Header/Header.elements";
+import { UserNavContainer } from "../../shared/Navbar/Navbar.elements";
 
 export const Container = styled.div`
   nav {
     position: relative !important;
-    background-image: url(https://demo.themewinter.com/wpsite/cafesio/wp-content/uploads/2020/11/banner.jpg);
+    /* background-image: url(https://demo.themewinter.com/wpsite/cafesio/wp-content/uploads/2020/11/banner.jpg); */
     background-size: cover;
     padding-top: 15px;
+  }
+  ${UserNavContainer} {
+    position: fixed !important;
+    top: 30px;
+    right: 0px;
+    margin-left: auto;
+   
+    background-image: none !important;
+    padding-top: 0 !important;
+    
+    @media only screen and (max-width: 960px) {
+      right: 0;
+    }
   }
  
 `;

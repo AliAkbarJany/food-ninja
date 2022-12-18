@@ -4,7 +4,10 @@ import { Link, useParams } from 'react-router-dom';
 import { Group } from 'styled-icons/boxicons-regular';
 import { InfoOutline } from 'styled-icons/evaicons-outline';
 import { Menu3, Time } from 'styled-icons/remix-fill';
+import MenuItems from '../../components/MenuItems/MenuItems';
 import Loading from '../../shared/Loading/Loading';
+
+import { useShoppingCart } from "use-shopping-cart";
 
 import {
     Adressbar,
@@ -15,31 +18,56 @@ import {
     Seperator, StoreInfo, Tags, VendorBanner, VendorButton,
     VendorDetails, VendorInfo, VendorLogo, VendorOpen, VendorTags
 } from './Restaurant.element';
+import CartSummary from '../../components/CartSummary/CartSummary';
+import Navbar from '../../shared/Navbar/Navbar';
 
 
 const Restaurant = () => {
     const { restaurantId } = useParams();
-
     const [restaurantTags, setRestaurantTags] = useState([]);
+    const [click, setClick] = useState(false);
 
-
-
-    // const url = `http://localhost:5000/restaurants/vendor/${restaurantId}`;
-    const url2 = `http://localhost:5000/menu/${restaurantId}`;
+    const [showCart, setShowCart] = useState(true);
+    const { cartCount, cartDetails } = useShoppingCart();
+    const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
 
     // React query...
     const { data: restaurant, isLoading: restaurantLoading } = useQuery(["restaurant", restaurantId], () => fetch(`http://localhost:5000/restaurants/vendor/${restaurantId}`).then((res) => res.json()));
+
     useEffect(() => {
         setRestaurantTags(restaurant?.restaurantType.split(", "));
     }, [restaurant]);
 
-    if (restaurantLoading) {
+    const {
+        data: store,
+        isLoading: menuLoading,
+        refetch,
+    } = useQuery(["menu", restaurantId], () =>fetch(`http://localhost:5000/menu/${restaurantId}`).then((res) => res.json(), {
+            refetchOnWindowFocus: false,
+            // enabled: false,
+            // staleTime: Infinity,
+            cacheTime: 0,
+        })
+    );
+    useEffect(() => {
+        if (cartCount) {
+          // refetch();
+          if (restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id) {
+            setShowCart(false);
+          }
+        }
+      }, [cartCount,cartItems, restaurantId, refetch]);
+
+
+    if (restaurantLoading || menuLoading) {
         return <Loading></Loading>;
     }
+
+ 
     return (
         <>
             <Container>
-                {/* <Header /> */}
+            <Navbar></Navbar>
                 <Grid>
                     <RestaurantContainer>
                         <BoxContainer>
@@ -128,16 +156,16 @@ const Restaurant = () => {
                                 </DrawerContent>
 
                                 {/* <VendorNavigation store={store} /> */}
-                                {/* <MenuItems
+                                <MenuItems
                                     store={store}
                                     showCart={showCart}
                                     setShowCart={setShowCart}
                                     restaurantId={restaurantId}
-                                /> */}
+                                />
                             </Box>
                         </BoxContainer>
                     </RestaurantContainer>
-                    {/* <Aside click={click}>
+                    <Aside click={click}>
                         <CartBox>
                             <CartSummary
                                 restaurant={restaurant}
@@ -145,7 +173,7 @@ const Restaurant = () => {
                                 setClick={setClick}
                             ></CartSummary>
                         </CartBox>
-                    </Aside> */}
+                    </Aside>
                 </Grid>
             </Container>
         </>

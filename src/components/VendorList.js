@@ -21,7 +21,7 @@ const VendorList = () => {
         <VendorContainer>
       <VendorListHeader>Popular restaurants</VendorListHeader>
       <RestaurantList>
-        {vendors.map((restaurant) => (
+        {vendors?.map((restaurant) => (
           <ListItem key={restaurant?._id}>
             <Link to={`/restaurant/${restaurant.restaurant_id}`}>
               <ImageTop background={restaurant.restaurantBanner}>

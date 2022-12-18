@@ -4,9 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
 // react-router...
 import { BrowserRouter } from "react-router-dom";
+
+import { loadStripe } from "@stripe/stripe-js";
+import { CartProvider } from "use-shopping-cart";
 
 // React  Query........
 import {
@@ -14,16 +16,26 @@ import {
   QueryClientProvider,
 } from 'react-query'
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: true,
+    },
+  },
+})
+
+const stripePromise = loadStripe("pk_test_51LEr9KBhhQqyCqe6pdI3j9qwMMZZCdC2wHTxL5Zyv3QGdZoJvg5iv6bVSxvonKuO9ag4l4bdADRBDPoNKTzUKdiV00eUm9i66S")
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <QueryClientProvider client={queryClient}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
+    <CartProvider mode="checkout-session" stripe={stripePromise} currency="USD">
+      <React.StrictMode>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </React.StrictMode>
+    </CartProvider>
   </QueryClientProvider>
 
 
