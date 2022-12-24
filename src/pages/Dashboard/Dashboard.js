@@ -6,7 +6,7 @@ import styled, { keyframes } from 'styled-components';
 // import { AdminPanelSettings } from 'styled-icons/material';
 import { AdminPanelSettings } from "@styled-icons/material/AdminPanelSettings";
 import { Logo, NavLogo, ProfileImage } from '../../shared/Navbar/Navbar.elements';
-import headerLogo from "../../assets/Header/Logo1.png";
+import headerLogo from "../../assets/Header/food_ninja2.png";
 import { DashboardCustomize, Restaurant } from 'styled-icons/material';
 import { ClipboardCheck } from 'styled-icons/heroicons-solid';
 import { HouseChimneyUser } from 'styled-icons/fa-solid';

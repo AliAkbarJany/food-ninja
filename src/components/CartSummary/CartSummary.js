@@ -17,6 +17,7 @@ const CartSummary = ({ restaurant, showCart, setClick }) => {
         redirectToCheckout,
       } = useShoppingCart();
       const handleCheckout = useCheckout();
+      console.log(cartDetails)
 
       const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
       console.log(cartItems);

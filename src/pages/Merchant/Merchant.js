@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import auth from '../../firebase.init';
 import { Logo, NavLogo } from '../../shared/Navbar/Navbar.elements';
 import MerchantStatus from './MerchantStatus';
-import headerLogo from "../../assets/Header/Logo2.png";
+import headerLogo from "../../assets/Header/food_ninja2.png";
 import { useQuery } from 'react-query';
 
 const Merchant = () => {

@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { ChevronDown, Close } from 'styled-icons/evaicons-solid';
 import { Menu3 } from 'styled-icons/icomoon';
 import { BookingBtn, CartBtn, LeftNav, ListItem, Logo, MobileIcon, NavContainer, NavItemBtn, NavLogo, NavMenu, NavOverlay, ProfileImage, RegisterBtn, RightNav, UserNavContainer, UserProfile } from './Navbar.elements';
-import headerLogo from "../../assets/Header/Logo1.png";
+import headerLogo from "../../assets/Header/food_ninja2.png";
 import DefaultPic from '../../assets/Login/default_pic.jpg'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';

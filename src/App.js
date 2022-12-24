@@ -18,6 +18,7 @@ import MakeVendor from './pages/Dashboard/MakeVendor/MakeVendor';
 import Merchant from './pages/Merchant/Merchant';
 import MyProfile from './pages/Dashboard/MyProfile';
 import RequireAuth from './pages/Login/RequireAuth';
+import RequireAdmin from './pages/Login/RequireAuth';
 import ManageItems from './pages/Dashboard/ManageItems/ManageItems';
 import RequireVendor from './pages/Login/RequireVendor'
 import AddMenu from './pages/Dashboard/AddMenu/AddMenu';
@@ -52,9 +53,23 @@ function App() {
 
           <Route index element={<MyProfile></MyProfile>} ></Route>
 
-          <Route path='all_user' element={<AllUsers></AllUsers>}></Route>
-          <Route path='all_vendor' element={<AllVendors></AllVendors>}></Route>
-          <Route path='make_vendor' element={<MakeVendor></MakeVendor>}></Route>
+          <Route path='all_user' element={
+            <RequireAdmin>
+              <AllUsers></AllUsers>
+            </RequireAdmin>
+          }></Route>
+
+          <Route path='all_vendor' element={
+            <RequireAdmin>
+              <AllVendors></AllVendors>
+            </RequireAdmin>
+          }></Route>
+          
+          <Route path='make_vendor' element={
+            <RequireAdmin>
+              <MakeVendor></MakeVendor>
+            </RequireAdmin>
+          }></Route>
 
           {/* <Route
             path="menu_list"

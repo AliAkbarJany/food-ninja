@@ -6,110 +6,112 @@ import { useShoppingCart } from 'use-shopping-cart';
 import DefaultImg from '../../assets/Restaurant/default_dish_pic.svg'
 
 const SingleItem = ({ menuItem, setShowCart, restaurantId }) => {
-    const [isChecked, setIsChecked] = React.useState(true);
-    const { addItem, cartDetails, formattedTotalPrice, totalPrice, clearCart } =
-        useShoppingCart();
+  const [isChecked, setIsChecked] = React.useState(true);
+  const { addItem, cartDetails, formattedTotalPrice, totalPrice, clearCart } =useShoppingCart();
+    
 
-    const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
-    // console.log({ totalPrice, formattedTotalPrice, cartDetails });
-    // console.log(cartItems[0].restaurantInfo._id);
-    const handleAddToCart = () => {
-        setShowCart(true);
-        if (restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id) {
-            clearCart();
-        }
-        addItem(menuItem);
+  console.log(cartDetails)
+  
+  const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
+  // console.log({ totalPrice, formattedTotalPrice, cartDetails });
+  // console.log(cartItems[0].restaurantInfo._id);
+  const handleAddToCart = () => {
+    setShowCart(true);
+    if (restaurantId !== cartItems[0]?.restaurantInfo?.restaurant_id) {
+      clearCart();
+    }
+    addItem(menuItem);
 
-        toast.success(`${menuItem.name} successfully added`);
-    };
-    return (
-        <>
-            <input type="checkbox" id="single-menu-item" className="modal-toggle" />
-            <label htmlFor="single-menu-item" className="modal cursor-pointer">
-                <MenuItemDialog>
-                    <label className="modal-box relative p-0" htmlFor="">
-                        <label
-                            htmlFor="single-menu-item"
-                            className="btn btn-sm btn-circle absolute right-2 top-2"
-                        >
-                            ✕
-                        </label>
-                        <ItemPic>
-                            <DishPhoto image={menuItem.image}></DishPhoto>
-                        </ItemPic>
-
-                        <ItemName>
-                            <div>
-                                <h3>{menuItem.name}</h3>
-                                <span>TK {menuItem.price}</span>
-                            </div>
-                            <p>
-                                You've been selected for a chance to get one year of
-                                subscription to use Wikipedia for free!
-                            </p>
-                        </ItemName>
-                        <AddOnsMenu>
-                            <MenuHeader>
-                                <h3>
-                                    <span>Add on</span>
-                                    <div>
-                                        <span>Optional</span>
-                                    </div>
-                                </h3>
-                                <p>Select up to 3</p>
-                            </MenuHeader>
-                        </AddOnsMenu>
-                        <AddOnOptions>
-                            <label htmlFor="topping 025089108">
-                                <input
-                                    type="checkbox"
-                                    id="checkboxid"
-                                    name="topping - 0"
-                                    value="25089108"
-                                    // onChange={() => setChecked(!checked)}
-                                    onChange={(event) =>
-                                        setIsChecked(event.currentTarget.checked)
-                                    }
-                                //   checked={isChecked}
-                                />
-
-                                <OptionLabel htmlFor="checkboxid">
-                                    {" "}
-                                    <Option>Chedder Cheese</Option>
-                                </OptionLabel>
-                            </label>
-                        </AddOnOptions>
-                        <AddToCartSection>
-                            <QuantityModifier>
-                                <button type="button">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlnsXlink="http://www.w3.org/1999/xlink"
-                                        width="24"
-                                        height="24"
-                                        aria-hidden="true"
-                                        viewBox="0 0 24 24"
-                                    >
-                                        <defs>
-                                            <path id="sIcMinus" d="M4 11h16v2H4z"></path>
-                                        </defs>
-                                        <use fillRule="evenodd" xlinkHref="#sIcMinus"></use>
-                                    </svg>
-                                </button>
-                                <span>1</span>
-                                <button type="button">
-                                    <RedPlus size={24} />
-                                </button>
-                            </QuantityModifier>
-                            <CartBtn type="button" onClick={handleAddToCart}>
-                                Add To Cart
-                            </CartBtn>
-                        </AddToCartSection>
-                    </label>
-                </MenuItemDialog>
+    toast.success(`${menuItem.name} successfully added`);
+  };
+  return (
+    <>
+      <input type="checkbox" id="single-menu-item" className="modal-toggle" />
+      <label htmlFor="single-menu-item" className="modal cursor-pointer">
+        <MenuItemDialog>
+          <label className="modal-box relative p-0" htmlFor="">
+            <label
+              htmlFor="single-menu-item"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
+            >
+              ✕
             </label>
-        </>
-    );
+            <ItemPic>
+              <DishPhoto image={menuItem.image}></DishPhoto>
+            </ItemPic>
+
+            <ItemName>
+              <div>
+                <h3>{menuItem.name}</h3>
+                <span>TK {menuItem.price}</span>
+              </div>
+              <p>
+                You've been selected for a chance to get one year of
+                subscription to use Wikipedia for free!
+              </p>
+            </ItemName>
+            <AddOnsMenu>
+              <MenuHeader>
+                <h3>
+                  <span>Add on</span>
+                  <div>
+                    <span>Optional</span>
+                  </div>
+                </h3>
+                <p>Select up to 3</p>
+              </MenuHeader>
+            </AddOnsMenu>
+            <AddOnOptions>
+              <label htmlFor="topping 025089108">
+                <input
+                  type="checkbox"
+                  id="checkboxid"
+                  name="topping - 0"
+                  value="25089108"
+                  // onChange={() => setChecked(!checked)}
+                  onChange={(event) =>
+                    setIsChecked(event.currentTarget.checked)
+                  }
+                //   checked={isChecked}
+                />
+
+                <OptionLabel htmlFor="checkboxid">
+                  {" "}
+                  <Option>Chedder Cheese</Option>
+                </OptionLabel>
+              </label>
+            </AddOnOptions>
+            <AddToCartSection>
+              <QuantityModifier>
+                <button type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                    width="24"
+                    height="24"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                  >
+                    <defs>
+                      <path id="sIcMinus" d="M4 11h16v2H4z"></path>
+                    </defs>
+                    <use fillRule="evenodd" xlinkHref="#sIcMinus"></use>
+                  </svg>
+                </button>
+                <span>1</span>
+                <button type="button">
+                  <RedPlus size={24} />
+                </button>
+              </QuantityModifier>
+              <CartBtn type="button" onClick={handleAddToCart}>
+                Add To Cart
+              </CartBtn>
+            </AddToCartSection>
+          </label>
+        </MenuItemDialog>
+      </label>
+    </>
+  );
 };
 
 export default SingleItem;
