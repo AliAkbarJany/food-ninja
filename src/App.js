@@ -23,6 +23,7 @@ import ManageItems from './pages/Dashboard/ManageItems/ManageItems';
 import RequireVendor from './pages/Login/RequireVendor'
 import AddMenu from './pages/Dashboard/AddMenu/AddMenu';
 import Restaurant from './pages/Restaurant/Restaurant';
+import Result from './pages/Result/Result';
 
 function App() {
   return (
@@ -43,6 +44,15 @@ function App() {
 
         {/* merchant.... */}
         <Route path='merchants' element={<Merchant></Merchant>} ></Route>
+
+        <Route
+            path="result"
+            element={
+              <RequireAuth>
+                <Result></Result>
+              </RequireAuth>
+            }
+          ></Route>
 
         {/* .......DashBoard......... */}
         <Route path='/dashboard' element={

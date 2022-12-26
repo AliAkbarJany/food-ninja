@@ -56,7 +56,7 @@ const WelcomeBanner = () => {
                                         </Box>
                                         <Info>
                                             <h4>Call Us For More Info</h4>
-                                            <p>+880 17654321</p>
+                                            <p>+880 1686527778</p>
                                         </Info>
                                     </InfoBox>
                                 </ButtonAction>

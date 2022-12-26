@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { CreditCard } from "styled-icons/boxicons-regular";
-import Loading from '../../../shared/Loading/Loading';
+import Loading from '../../shared/Loading/Loading';
 import auth from '../../firebase.init';
 
 const useQueryString = () => {
