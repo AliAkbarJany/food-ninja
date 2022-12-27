@@ -63,7 +63,7 @@ const AddMenu = () => {
         isLoading,
         refetch,
     } = useQuery(["Restaurant", user.email], () =>
-        fetch(`http://localhost:5000/restaurant?restaurantId=${user.email}`).then(
+        fetch(`https://food-ninja-server.onrender.com/restaurant?restaurantId=${user.email}`).then(
             (res) => res.json()
         )
     );
@@ -74,7 +74,7 @@ const AddMenu = () => {
     };
 
     const getData = async () => {
-        let res = await axios.get("http://localhost:5000/category");
+        let res = await axios.get("https://food-ninja-server.onrender.com/category");
         console.log('inside Axios',res)
         return res.data;
     };
@@ -128,7 +128,7 @@ const AddMenu = () => {
                         };
                         console.log('category', categoryInfo)
 
-                        fetch(`http://localhost:5000/category`, {
+                        fetch(`https://food-ninja-server.onrender.com/category`, {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json",
@@ -145,7 +145,7 @@ const AddMenu = () => {
 
                     }
                     // send to dataBase
-                    fetch(`http://localhost:5000/meal`, {
+                    fetch(`https://food-ninja-server.onrender.com/meal`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json",

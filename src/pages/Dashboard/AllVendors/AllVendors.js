@@ -9,7 +9,7 @@ const AllVendors = () => {
         isLoading,
         refetch,
     } = useQuery([`restaurants`], () =>
-        fetch(`http://localhost:5000/restaurants/vendor`).then((res) => res.json())
+        fetch(`https://food-ninja-server.onrender.com/restaurants/vendor`).then((res) => res.json())
     );
 
     if (isLoading) {
@@ -17,7 +17,7 @@ const AllVendors = () => {
     }
 
     const handleRemove = (email) => {
-        fetch(`http://localhost:5000/restaurant/vendor/${email}`, {
+        fetch(`https://food-ninja-server.onrender.com/restaurant/vendor/${email}`, {
             method: "DELETE",
         })
             .then((res) => {

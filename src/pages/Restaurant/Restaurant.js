@@ -32,7 +32,7 @@ const Restaurant = () => {
     const cartItems = Object.keys(cartDetails).map((key) => cartDetails[key]);
 
     // React query...
-    const { data: restaurant, isLoading: restaurantLoading } = useQuery(["restaurant", restaurantId], () => fetch(`http://localhost:5000/restaurants/vendor/${restaurantId}`).then((res) => res.json()));
+    const { data: restaurant, isLoading: restaurantLoading } = useQuery(["restaurant", restaurantId], () => fetch(`https://food-ninja-server.onrender.com/restaurants/vendor/${restaurantId}`).then((res) => res.json()));
 
     useEffect(() => {
         setRestaurantTags(restaurant?.restaurantType.split(", "));
@@ -42,7 +42,7 @@ const Restaurant = () => {
         data: store,
         isLoading: menuLoading,
         refetch,
-    } = useQuery(["menu", restaurantId], () =>fetch(`http://localhost:5000/menu/${restaurantId}`).then((res) => res.json(), {
+    } = useQuery(["menu", restaurantId], () =>fetch(`https://food-ninja-server.onrender.com/menu/${restaurantId}`).then((res) => res.json(), {
             refetchOnWindowFocus: false,
             // enabled: false,
             // staleTime: Infinity,

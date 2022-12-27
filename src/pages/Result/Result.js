@@ -20,7 +20,7 @@ const Result = () => {
     console.log(queryString)
 
     const { data, isLoading, isError } = useQuery("Result", () => sessionId ?
-        axios(`http://localhost:5000/checkout-sessions/${sessionId}`).then(
+        axios(`https://food-ninja-server.onrender.com/checkout-sessions/${sessionId}`).then(
             (res) => res.data)
         : null
     )

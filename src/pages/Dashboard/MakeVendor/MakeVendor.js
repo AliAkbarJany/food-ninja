@@ -11,7 +11,7 @@ const MakeVendor = () => {
         isLoading,
         refetch,
       } = useQuery([`restaurants`], () =>
-        fetch(`http://localhost:5000/restaurants`).then((res) => res.json())
+        fetch(`https://food-ninja-server.onrender.com/restaurants`).then((res) => res.json())
       );
     
       if (isLoading) {
@@ -21,7 +21,7 @@ const MakeVendor = () => {
       const handleApprove = (email) => {
         const restaurantId = nanoid();
         console.log( 'Nano ID creation', restaurantId)
-        fetch(`http://localhost:5000/restaurant/${email}`, {
+        fetch(`https://food-ninja-server.onrender.com/restaurant/${email}`, {
           method: "PATCH",
           headers: {
             "content-type": "application/json",

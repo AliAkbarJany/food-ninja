@@ -15,7 +15,7 @@ const ManageItems = () => {
         isLoading,
         refetch,
     } = useQuery([`menus`], () =>
-        fetch(`http://localhost:5000/menus/${user?.email}`).then((res) => res.json())
+        fetch(`https://food-ninja-server.onrender.com/menus/${user?.email}`).then((res) => res.json())
     );
 
     console.log(menus)
@@ -29,7 +29,7 @@ const ManageItems = () => {
     const handleDelete = id => {
         const proceed = window.confirm("Are you sure to Delete this User");
         if (proceed) {
-            fetch(`http://localhost:5000/deleteMenus/${id}`, {
+            fetch(`https://food-ninja-server.onrender.com/deleteMenus/${id}`, {
                 method: "DELETE",
             })
                 .then((res) => res.json())

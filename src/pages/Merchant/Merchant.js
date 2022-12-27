@@ -8,7 +8,7 @@ import { format } from 'date-fns';
 import auth from '../../firebase.init';
 import { Logo, NavLogo } from '../../shared/Navbar/Navbar.elements';
 import MerchantStatus from './MerchantStatus';
-import headerLogo from "../../assets/Header/food_ninja2.png";
+import headerLogo from "../../assets/Header/food_ninja3.png";
 import { useQuery } from 'react-query';
 
 const Merchant = () => {
@@ -36,7 +36,7 @@ const Merchant = () => {
         isLoading,
         refetch,
     } = useQuery(["Restaurant", user.email], () =>
-        fetch(`http://localhost:5000/restaurant?restaurantId=${user.email}`).then(
+        fetch(`https://food-ninja-server.onrender.com/restaurant?restaurantId=${user.email}`).then(
             (res) => res.json()
         )
     );
@@ -56,7 +56,7 @@ const Merchant = () => {
             restaurant_id: restaurantInfo?.restaurant_id || "",
         };
         // console.log(restaurantInfo);
-        fetch(`http://localhost:5000/restaurant/${user.email}`, {
+        fetch(`https://food-ninja-server.onrender.com/restaurant/${user.email}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",
